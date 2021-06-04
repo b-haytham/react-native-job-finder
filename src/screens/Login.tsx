@@ -1,9 +1,10 @@
 import React from 'react'
 import {  StyleSheet, View } from 'react-native'
-import { Button,  Layout, Text } from '@ui-kitten/components'
+import { Button } from '@ui-kitten/components'
 
 import Constants from 'expo-constants'
 import { LoginScreenNavigationProps, LoginScreenRouteProps } from '../navigation/ScreensNavigationRouteProps'
+import Layout from '../components/Layout'
 
 interface LoginProps{
     navigation: LoginScreenNavigationProps

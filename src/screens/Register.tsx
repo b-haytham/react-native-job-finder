@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { } from 'react-native'
+import { Text } from '@ui-kitten/components'
+import Layout from '../components/Layout'
 import { RegisterScreenNavigationProps, RegisterScreenRouteProps } from '../navigation/ScreensNavigationRouteProps'
 
 interface RegisterProps{
@@ -9,16 +11,10 @@ interface RegisterProps{
 
 const Register: React.FC<RegisterProps> = ({ navigation, route }) =>{
     return (
-        <View style={styles.container}>
-            <Text>Register</Text>
-        </View>
+        <Layout>
+            <Text> Register</Text>    
+        </Layout>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    }
-})
 
 export default Register
