@@ -1,9 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { RegisterScreenNavigationProps, RegisterScreenRouteProps } from '../navigation/ScreensNavigationRouteProps'
 
-interface RegisterProps{}
+interface RegisterProps{
+    navigation: RegisterScreenNavigationProps
+    route: RegisterScreenRouteProps
+}
 
-const Register: React.FC<RegisterProps> = ({}) =>{
+const Register: React.FC<RegisterProps> = ({ navigation, route }) =>{
     return (
         <View style={styles.container}>
             <Text>Register</Text>

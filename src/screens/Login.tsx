@@ -1,19 +1,29 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import {  StyleSheet, View } from 'react-native'
+import { Button,  Layout, Text } from '@ui-kitten/components'
 
-interface LoginProps{}
+import Constants from 'expo-constants'
+import { LoginScreenNavigationProps, LoginScreenRouteProps } from '../navigation/ScreensNavigationRouteProps'
 
-const Login: React.FC<LoginProps> = ({}) =>{
+interface LoginProps{
+    navigation: LoginScreenNavigationProps
+    route: LoginScreenRouteProps
+}
+
+const Login: React.FC<LoginProps> = ({navigation, route}) =>{
     return (
-        <View style={styles.container}>
-            <Text>Login</Text>
-        </View>
+        <Layout style={styles.container}>
+            <View>
+            <Button  appearance='ghost' onPress={() =>{navigation.navigate('Main', {screen: 'Home'})}}>Active</Button>
+            </View>
+        </Layout>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex:1,
+        paddingTop: Constants.statusBarHeight
     }
 })
 

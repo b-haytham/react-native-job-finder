@@ -1,9 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { HomeScreenNavigationProps, HomeScreenRouteProps } from '../navigation/ScreensNavigationRouteProps'
 
-interface HomeScreenProps{}
+interface HomeScreenProps{
+    navigation: HomeScreenNavigationProps
+    route: HomeScreenRouteProps
+}
 
-const HomeScreen: React.FC<HomeScreenProps> = ({}) =>{
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) =>{
     return (
         <View style={styles.container}>
             <Text>HomeScreen</Text>
