@@ -20,6 +20,7 @@ interface TextProps extends UITextProps {
 }
 
 const Text: React.FC<TextProps> = (props) => {
+    console.log(props.font)
     return (
         <UIText
             style={{
