@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import { myTheme } from "./src/utils/theme";
 
 export default function App() {
 
@@ -28,7 +27,7 @@ export default function App() {
         return (
             <Provider store={store}>
                 <Navigation />
-                <StatusBar backgroundColor={myTheme["color-primary-500"]} />
+                <StatusBar />
             </Provider>
         );
     }

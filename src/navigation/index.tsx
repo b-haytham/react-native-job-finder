@@ -2,21 +2,16 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
 import AppStack from "./AppStack";
-import * as eva from "@eva-design/eva";
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
-import { myTheme } from "../utils/theme";
-import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import theme from "../utils/theme";
+import { ThemeProvider } from "@shopify/restyle";
 
 const Navigation = () => {
     return (
-        <>
-        <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={{...eva.light, ...myTheme}}>
+        <ThemeProvider theme={theme}>
             <NavigationContainer>
                 <AppStack />
             </NavigationContainer>
-        </ApplicationProvider>
-        </>
+        </ThemeProvider>
     );
 };
 

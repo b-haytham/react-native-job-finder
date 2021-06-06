@@ -8,13 +8,11 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@eva-design/eva": "^2.1.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "@reduxjs/toolkit": "^1.5.1",
-    "@ui-kitten/components": "^5.1.0",
-    "@ui-kitten/eva-icons": "^5.1.0",
+    "@shopify/restyle": "^1.4.0",
     "expo": "~41.0.1",
     "expo-app-loading": "^1.0.3",
     "expo-constants": "~10.1.3",

@@ -1,7 +1,6 @@
-import { Text } from '@ui-kitten/components'
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import Layout from '../components/Layout'
+import { StyleSheet, View, Text } from 'react-native'
+
 import { HomeScreenNavigationProps, HomeScreenRouteProps } from '../navigation/ScreensNavigationRouteProps'
 
 interface HomeScreenProps{
@@ -11,10 +10,12 @@ interface HomeScreenProps{
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) =>{
     return (
-        <Layout>
+        <View>
             <Text>HomeScreen</Text>
-        </Layout>
+        </View>
     )
 }
+
+
 
 export default HomeScreen

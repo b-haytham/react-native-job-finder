@@ -1,7 +1,6 @@
 import React from 'react'
-import { } from 'react-native'
-import { Text } from '@ui-kitten/components'
-import Layout from '../components/Layout'
+import { View, Text } from 'react-native'
+
 import { RegisterScreenNavigationProps, RegisterScreenRouteProps } from '../navigation/ScreensNavigationRouteProps'
 
 interface RegisterProps{
@@ -11,9 +10,9 @@ interface RegisterProps{
 
 const Register: React.FC<RegisterProps> = ({ navigation, route }) =>{
     return (
-        <Layout>
+        <View>
             <Text> Register</Text>    
-        </Layout>
+        </View>
     )
 }
 
