@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, Button, Dimensions } from "react-native";
 
 import Constants from "expo-constants";
 import {
@@ -10,14 +10,20 @@ import { Box, Text } from "../utils/restyle";
 import { useAppSelector } from "../redux/store";
 import SimpleJobCard from "../components/cards/SimpleJobCard";
 import MainJobCard from "../components/cards/MainJobCard";
+import { useSharedValue } from "react-native-reanimated";
+import FilterView from "../components/FilterView";
 
 interface LoginProps {
     navigation: LoginScreenNavigationProps;
     route: LoginScreenRouteProps;
 }
 
+const { width, height } = Dimensions.get('screen')
+const FILTER_VIEW_HEIGHT = height * .9
+
 const Login: React.FC<LoginProps> = ({ navigation, route }) => {
     const jobs = useAppSelector(state => state.jobs.job_list)
+    const filterViewTranslateY = useSharedValue(FILTER_VIEW_HEIGHT)
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -100,7 +106,11 @@ const Login: React.FC<LoginProps> = ({ navigation, route }) => {
                >
                    <MainJobCard  job={jobs[0]} />
                </Box>
+               <Box>
+                   <Button title='Filter' onPress={() => filterViewTranslateY.value = 0} />
+               </Box>
             </ScrollView>
+            <FilterView width={width} height={FILTER_VIEW_HEIGHT} translateY={filterViewTranslateY} />
         </View>
     );
 };

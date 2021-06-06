@@ -13,6 +13,7 @@ interface SimpleJobCardProps extends BoxProps<Theme> {
 const SimpleJobCard: React.FC<SimpleJobCardProps> = ({ job, ...rest }) => {
     return (
         <Box
+            bg='white'
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
