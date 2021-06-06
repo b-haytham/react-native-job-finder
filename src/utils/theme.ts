@@ -1,10 +1,20 @@
 import { createTheme } from '@shopify/restyle'
 
 const palette = {
-  black: '#222222',
+  black1: '#000',
+  black2: '#262626',
+  black3: '#434343',
+  black4: '#555555',
   white: '#FFFFFF',
-  gray: "#9B9B9B",
-  primary: "#DB3022",
+  gray1: "#fafafafa",
+  gray2: "#f5f5f5f5",
+  gray3: "#e9e9e9e9",
+  gray4: "#c4c4c4c4",
+  
+  primary1: "#44C6D2",
+  primary2: "#5dd0da",
+  primary3: "#87dee4",
+  primaryDarker: "#44C6D2",
   backgroundLight: "#F5F5F5F5",
   error: "#F01F0E",
   success: "#2AA952",
@@ -17,10 +27,19 @@ const theme = createTheme({
   colors: {
     background: palette.backgroundLight,
     white: palette.white,
-    gray: palette.gray,
-    black: palette.black,
+    gray1: palette.gray1,
+    gray2: palette.gray2,
+    gray3: palette.gray3,
+    gray4: palette.gray4,
+    black1: palette.black1,
+    black2: palette.black2,
+    black3: palette.black3,
+    black4: palette.black4,
     error: palette.error,
-    primary: palette.primary,
+    primary1: palette.primary1,
+    primary2: palette.primary2,
+    primary3: palette.primary3,
+    primaryDarker: palette.primaryDarker,
     success: palette.success,
     darkColor: palette.darkColor
   },
@@ -43,53 +62,53 @@ const theme = createTheme({
   },
   textVariants: {
     headline: {
-      fontFamily: "Ubuntu-Bold",
-      fontSize: 34,
-      lineHeight: 34,
-      color: "black"
+      fontFamily: "Poppins-Bold",
+      fontSize: 40,
+      lineHeight: 45,
+      color: "black1"
     },
     headline2: {
-      fontFamily: "Ubuntu-Medium",
-      fontSize: 24,
-      lineHeight: 28.8,
-      color: "black"
+      fontFamily: "Poppins-SemiBold",
+      fontSize: 35,
+      lineHeight: 39,
+      color: "black1"
     },
     headline3: {
-      fontFamily: "Ubuntu-Medium",
-      fontSize: 18,
-      lineHeight: 22,
-      color: "black"
+      fontFamily: "Poppins-SemiBold",
+      fontSize: 30,
+      lineHeight: 35,
+      color: "black1"
     },
     body: {
-      fontFamily: "Ubuntu-Regular",
+      fontFamily: "Poppins-Regular",
       fontSize: 14,
       lineHeight: 20,
-      color: "black"
+      color: "black1"
     },
     body2: {
-      fontFamily: "Ubuntu-Medium",
+      fontFamily: "Poppins-Medium",
       fontSize: 16,
-      lineHeight: 16,
-      color: "black"
+      lineHeight: 19,
+      color: "black1"
     },
     description: {
-      fontFamily: "Ubuntu-Regular",
+      fontFamily: "Poppins-Medium",
       fontSize: 14,
       lineHeight: 20,
-      color: "black",
-      opacity: 0.8
+      color: "black4",
+      opacity: .8
     },
     small: {
-      fontFamily: "Ubuntu-Regular",
+      fontFamily: "Poppins-Regular",
       fontSize: 11,
       lineHeight: 11,
       color: "black"
     },
     smallGray: {
-      fontFamily: "Ubuntu-Regular",
+      fontFamily: "Poppins-Regular",
       fontSize: 11,
       lineHeight: 11,
-      color: "gray"
+      color: "black1"
     },
   }
 });
