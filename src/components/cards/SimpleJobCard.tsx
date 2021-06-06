@@ -13,12 +13,12 @@ interface SimpleJobCardProps extends BoxProps<Theme> {
 const SimpleJobCard: React.FC<SimpleJobCardProps> = ({ job, ...rest }) => {
     return (
         <Box
-            elevation={10}
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
             p="s"
             borderRadius="m"
+            
             {...rest}
         >
             <Box flexDirection="row" alignItems="center">
@@ -28,7 +28,9 @@ const SimpleJobCard: React.FC<SimpleJobCardProps> = ({ job, ...rest }) => {
                 />
                 <Box>
                     <Box maxWidth={200}>
-                        <Text  textAlign='justify' variant="body2"> {job.job_title} </Text>
+                        <Text textAlign="justify" variant="body2">
+                            {job.job_title}
+                        </Text>
                     </Box>
                     <Text variant="description"> {job.type} </Text>
                 </Box>

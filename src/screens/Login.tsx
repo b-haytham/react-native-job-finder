@@ -89,15 +89,14 @@ const Login: React.FC<LoginProps> = ({ navigation, route }) => {
                    <Text variant='body2' >Body 2</Text>
                    <Text variant='description' >Desciption</Text>
                </Box>
-               <Box
-                    margin='m'
-                    
+               <Box 
+                   m='m' 
                >
                 
                    <SimpleJobCard  job={jobs[0]} />
                </Box>
                <Box
-                    margin='m'    
+                 m='m'      
                >
                    <MainJobCard  job={jobs[0]} />
                </Box>
