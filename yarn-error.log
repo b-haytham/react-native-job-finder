@@ -1,30 +1,30 @@
 Arguments: 
-  /home/b-haytham/.nvm/versions/node/v14.16.0/bin/node /usr/share/yarn/bin/yarn.js add plugins: [
+  /home/b-haytham/.nvm/versions/node/v14.17.0/bin/node /home/b-haytham/.nvm/versions/node/v14.17.0/bin/yarn add -D @types/rn-range-slider
 
 PATH: 
-  /home/b-haytham/Downloads/kafka/bin:/home/b-haytham/.sdkman/candidates/java/current/bin:/home/b-haytham/.sdkman/candidates/gradle/current/bin:/home/b-haytham/.nvm/versions/node/v14.16.0/bin:/home/b-haytham/.cargo/bin:/home/b-haytham/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/b-haytham/Android/Sdk/emulator:/home/b-haytham/Android/Sdk/tools:/home/b-haytham/Android/Sdk/tools/bin:/home/b-haytham/Android/Sdk/platform-tools:/usr/local/go/bin
+  /home/b-haytham/.nvm/versions/node/v14.17.0/bin:/home/b-haytham/.local/bin:/usr/local/bin:/usr/bin:/var/lib/snapd/snap/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/b-haytham/Android/Sdk/emulator:/home/b-haytham/Android/Sdk/tools:/home/b-haytham/Android/Sdk/tools/bin:/home/b-haytham/Android/Sdk/platform-tools
 
 Yarn version: 
-  1.22.5
+  1.22.10
 
 Node version: 
-  14.16.0
+  14.17.0
 
 Platform: 
   linux x64
 
 Trace: 
-  Error: Invalid URL
-      at module.exports.module.exports (/usr/share/yarn/lib/cli.js:71821:9)
-      at urlParts (/usr/share/yarn/lib/cli.js:31614:75)
-      at NpmRegistry.isRequestToRegistry (/usr/share/yarn/lib/cli.js:31657:19)
-      at NpmRegistry.<anonymous> (/usr/share/yarn/lib/cli.js:31689:31)
-      at Generator.next (<anonymous>)
-      at step (/usr/share/yarn/lib/cli.js:310:30)
-      at /usr/share/yarn/lib/cli.js:328:14
-      at new Promise (<anonymous>)
-      at new F (/usr/share/yarn/lib/cli.js:5301:28)
-      at NpmRegistry.<anonymous> (/usr/share/yarn/lib/cli.js:307:12)
+  Error: https://registry.yarnpkg.com/@types%2frn-range-slider: Not found
+      at Request.params.callback [as _callback] (/home/b-haytham/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:66988:18)
+      at Request.self.callback (/home/b-haytham/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:140662:22)
+      at Request.emit (events.js:376:20)
+      at Request.<anonymous> (/home/b-haytham/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:141634:10)
+      at Request.emit (events.js:376:20)
+      at IncomingMessage.<anonymous> (/home/b-haytham/.nvm/versions/node/v14.17.0/lib/node_modules/yarn/lib/cli.js:141556:12)
+      at Object.onceWrapper (events.js:482:28)
+      at IncomingMessage.emit (events.js:388:22)
+      at endReadableNT (internal/streams/readable.js:1336:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
 
 npm manifest: 
   {
@@ -51,6 +51,7 @@ npm manifest:
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+      "react-native-dropdown-picker": "^5.1.19",
       "react-native-gesture-handler": "~1.10.2",
       "react-native-reanimated": "~2.1.0",
       "react-native-redash": "^16.0.11",
@@ -60,7 +61,8 @@ npm manifest:
       "react-native-svg": "12.1.0",
       "react-native-web": "~0.13.12",
       "react-navigation-shared-element": "^5.0.0-alpha1",
-      "react-redux": "^7.2.4"
+      "react-redux": "^7.2.4",
+      "rn-range-slider": "^2.0.4"
     },
     "devDependencies": {
       "@babel/core": "^7.9.0",
@@ -5600,7 +5602,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
     integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
   
-  react-native-gesture-handler@~1.10.2:
+  react-native-dropdown-picker@^5.1.19:
+    version "5.1.19"
+    resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.1.19.tgz#591a70b3031f7b013eafb934cebb10d8e8558a44"
+    integrity sha512-OAraXBiq3uaelzQefXvPDtuCfAwD4HEtq9h39a9dVcudtsi7yNyTe2zP/V9wdFVRodcMUVI5woNIcrDeg4pCWw==
+    dependencies:
+      react-native-gesture-handler "*"
+  
+  react-native-gesture-handler@*, react-native-gesture-handler@~1.10.2:
     version "1.10.3"
     resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz#942bbf2963bbf49fa79593600ee9d7b5dab3cfc0"
     integrity sha512-cBGMi1IEsIVMgoox4RvMx7V2r6bNKw0uR1Mu1o7NbuHS6BRSVLq0dP34l2ecnPlC+jpWd3le6Yg1nrdCjby2Mw==
@@ -5924,6 +5933,11 @@ Lockfile:
     version "2.2.8"
     resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
     integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
+  
+  rn-range-slider@^2.0.4:
+    version "2.0.4"
+    resolved "https://registry.yarnpkg.com/rn-range-slider/-/rn-range-slider-2.0.4.tgz#850630d603bf364fe98d5e79ce1c220bde6a9d21"
+    integrity sha512-DSuD/iJrJcXjDrEmadTX1rWyM4efkDgyjh2lb2vNtJvHbcQ9UVJ6bvabc9F45b5YquM60f4Y8GWzjYq8SLtZlQ==
   
   rsvp@^4.8.4:
     version "4.8.5"
