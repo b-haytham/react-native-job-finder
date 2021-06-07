@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
 
-import { BoxProps } from "@shopify/restyle";
+import { BoxProps, useTheme } from "@shopify/restyle";
 import { Box, Text } from "../utils/restyle";
 import { Theme } from "../utils/theme";
 import Animated, {
@@ -20,11 +20,13 @@ import Constants from "expo-constants";
 import DropDownPicker, { ValueType } from "react-native-dropdown-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Button from "./forms/form_elements/Button";
+import PriceSlider from "./slider/PriceSlider";
 
 interface FilterViewProps extends BoxProps<Theme> {
     width: number;
     height: number;
     translateY: Animated.SharedValue<number>;
+    onApply?(filters: {}): void
 }
 
 const AnimatedBox = Animated.createAnimatedComponent(Box);
@@ -35,6 +37,7 @@ const FilterView: React.FC<FilterViewProps> = ({
     translateY,
     ...rest
 }) => {
+    const theme = useTheme<Theme>()
     // category state
     const [categoryOpen, setCategoryOpen] = useState(false);
     const [subCategoryOpen, setSubCategoryOpen] = useState(false);
@@ -53,6 +56,10 @@ const FilterView: React.FC<FilterViewProps> = ({
     // salary state
 
     // job type state
+    const [jobType, setJobtype] = useState<
+        ('Full time' | "Contract" | "Temporary" | 'Part time' | "Internship")[]
+    >([])
+    console.log(jobType)
     // job type state
 
     // experience state
@@ -103,7 +110,7 @@ const FilterView: React.FC<FilterViewProps> = ({
             >
                 <PanGestureHandler onGestureEvent={gestureHandler}>
                     <AnimatedBox
-                        bg="gray4"
+                        bg="primary3"
                         width={100}
                         height={10}
                         borderRadius="m"
@@ -125,6 +132,8 @@ const FilterView: React.FC<FilterViewProps> = ({
                             setOpen={setCategoryOpen}
                             setValue={setValue}
                             setItems={setItems}
+                            style={{borderColor: theme.colors.primary1}}
+                            dropDownContainerStyle={{borderColor: theme.colors.primary1}}
                         />
                     </Box>
                     <Box marginVertical="s">
@@ -137,6 +146,8 @@ const FilterView: React.FC<FilterViewProps> = ({
                             setOpen={setSubCategoryOpen}
                             setValue={setValue}
                             setItems={setItems}
+                            style={{borderColor: theme.colors.primary1}}
+                            dropDownContainerStyle={{borderColor: theme.colors.primary1}}
                         />
                     </Box>
                     <Box marginVertical="s">
@@ -149,11 +160,22 @@ const FilterView: React.FC<FilterViewProps> = ({
                             setOpen={setLocationOpen}
                             setValue={setValue}
                             setItems={setItems}
+                            style={{borderColor: theme.colors.primary1}}
+                            dropDownContainerStyle={{borderColor: theme.colors.primary1}}
                         />
                     </Box>
                 </Box>
                 <Box paddingHorizontal="m" marginVertical="m">
                     <Text variant="body2">Salary Estimate</Text>
+                    <Box marginVertical='m'>
+                        <PriceSlider 
+                            minValue={0}
+                            maxValue={5000}
+                            lowValue={500}
+                            highValue={1200}
+                            onValueChange={(l, h) => {}} 
+                        />
+                    </Box>
                 </Box>
                 <Box paddingHorizontal="m" marginVertical="m">
                     <Text variant="body2">Job type</Text>
@@ -170,13 +192,20 @@ const FilterView: React.FC<FilterViewProps> = ({
                             >
                                 <BouncyCheckbox
                                     size={25}
-                                    fillColor="red"
+                                    fillColor={theme.colors.primary1}
                                     unfillColor="#FFFFFF"
                                     useNativeDriver
-                                    iconStyle={{ borderColor: "red" }}
+                                    iconStyle={{ borderColor: theme.colors.primary1 }}
                                     onPress={(
                                         isChecked: boolean | undefined
-                                    ) => {}}
+                                    ) => {
+                                         if(!isChecked) {
+                                             setJobtype(prev => prev.filter(j => j !== 'Full time'))
+                                         } else {
+                                             setJobtype(prev => [...prev, 'Full time'])
+                                         }
+                                    }}
+                                    isChecked={jobType.includes('Full time')}
                                 />
                                 <Text marginLeft="s" variant="description">
                                     Full time
@@ -189,13 +218,21 @@ const FilterView: React.FC<FilterViewProps> = ({
                             >
                                 <BouncyCheckbox
                                     size={25}
-                                    fillColor="red"
+                                    fillColor={theme.colors.primary1}
                                     unfillColor="#FFFFFF"
                                     useNativeDriver
-                                    iconStyle={{ borderColor: "red" }}
+                                    iconStyle={{ borderColor: theme.colors.primary1 }}
                                     onPress={(
                                         isChecked: boolean | undefined
-                                    ) => {}}
+                                    ) => {
+                                        console.log(isChecked)
+                                        if(!isChecked) {
+                                            setJobtype(prev => prev.filter(j => j !== 'Contract'))
+                                        } else {
+                                            setJobtype(prev => [...prev, 'Contract'])
+                                        }
+                                    }}
+                                    isChecked={jobType.includes('Contract') }
                                 />
                                 <Text marginLeft="s" variant="description">
                                     Contract
@@ -208,13 +245,20 @@ const FilterView: React.FC<FilterViewProps> = ({
                             >
                                 <BouncyCheckbox
                                     size={25}
-                                    fillColor="red"
+                                    fillColor={theme.colors.primary1}
                                     unfillColor="#FFFFFF"
                                     useNativeDriver
-                                    iconStyle={{ borderColor: "red" }}
+                                    iconStyle={{ borderColor: theme.colors.primary1 }}
                                     onPress={(
                                         isChecked: boolean | undefined
-                                    ) => {}}
+                                    ) => {
+                                        if(!isChecked) {
+                                            setJobtype(prev => prev.filter(j => j !== 'Temporary'))
+                                        } else {
+                                            setJobtype(prev => [...prev, 'Temporary'])
+                                        }
+                                    }}
+                                    isChecked={jobType.includes('Temporary')}
                                 />
                                 <Text marginLeft="s" variant="description">
                                     Temporary
@@ -229,13 +273,20 @@ const FilterView: React.FC<FilterViewProps> = ({
                             >
                                 <BouncyCheckbox
                                     size={25}
-                                    fillColor="red"
+                                    fillColor={theme.colors.primary1}
                                     unfillColor="#FFFFFF"
                                     useNativeDriver
-                                    iconStyle={{ borderColor: "red" }}
+                                    iconStyle={{ borderColor: theme.colors.primary1 }}
                                     onPress={(
                                         isChecked: boolean | undefined
-                                    ) => {}}
+                                    ) => {
+                                        if(!isChecked) {
+                                            setJobtype(prev => prev.filter(j => j !== 'Part time'))
+                                        } else {
+                                            setJobtype(prev => [...prev, 'Part time'])
+                                        }
+                                    }}
+                                    isChecked={jobType.includes('Part time')}
                                 />
                                 <Text marginLeft="s" variant="description">
                                     Part time
@@ -248,13 +299,20 @@ const FilterView: React.FC<FilterViewProps> = ({
                             >
                                 <BouncyCheckbox
                                     size={25}
-                                    fillColor="red"
+                                    fillColor={theme.colors.primary1}
                                     unfillColor="#FFFFFF"
                                     useNativeDriver
-                                    iconStyle={{ borderColor: "red" }}
+                                    iconStyle={{ borderColor: theme.colors.primary1 }}
                                     onPress={(
                                         isChecked: boolean | undefined
-                                    ) => {}}
+                                    ) => {
+                                        if(!isChecked) {
+                                            setJobtype(prev => prev.filter(j => j !== 'Internship'))
+                                        } else {
+                                            setJobtype(prev => [...prev, 'Internship'])
+                                        }
+                                    }}
+                                    isChecked={jobType.includes('Internship')}
                                 />
                                 <Text marginLeft="s" variant="description">
                                     Internship
