@@ -27,6 +27,7 @@ const Login: React.FC<LoginProps> = ({ navigation, route }) => {
     return (
         <View style={styles.container}>
             <ScrollView>
+                <Button title='Home' onPress={() => navigation.navigate('Main', {screen: 'Home'})} />
             <Box
                     borderRadius="l"
                     elevation={30}
