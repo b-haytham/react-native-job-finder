@@ -79,6 +79,12 @@ const theme = createTheme({
       lineHeight: 35,
       color: "black1"
     },
+    headline4: {
+      fontFamily: "Poppins-SemiBold",
+      fontSize: 25,
+      lineHeight: 29,
+      color: "black3"
+    },
     body: {
       fontFamily: "Poppins-Regular",
       fontSize: 14,

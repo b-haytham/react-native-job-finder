@@ -1,7 +1,7 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useTheme } from "@shopify/restyle";
 import React, { useState } from "react";
-import { Dimensions, Pressable, StyleSheet } from "react-native";
+import { Dimensions, Pressable, ScrollView, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
     useSharedValue,
@@ -13,6 +13,7 @@ import Hero from "../components/Hero";
 import Layout from "../components/Layout";
 import BackDrop from "../components/Navigation/BackDrop";
 import Drawer from "../components/Navigation/Drawer";
+import Selectables from "../components/Selectables";
 
 import {
     HomeScreenNavigationProps,
@@ -31,12 +32,17 @@ const { width, height } = Dimensions.get("screen");
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     const theme = useTheme<Theme>();
 
+    // category state
+    const [category, setCategory] = useState(null);
+    // category state
+
+    // search state
     const [searchTerm, setSearchTerm] = useState("");
-    const drawerTranslateX = useSharedValue(-width * .61);
-    
+    // search state
+
+    const drawerTranslateX = useSharedValue(-width * 0.61);
 
     const showDrawer = () => {
-        
         drawerTranslateX.value = withTiming(0);
     };
 
@@ -46,28 +52,27 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                 width={width * 0.6}
                 height={height}
                 translationX={drawerTranslateX}
-              
             />
             {/* <BackDrop width={width} height={height}  onPress={() => {console.log('Pressed')}} /> */}
             <Layout bg="gray1">
-                <Box
-                    flexDirection="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    overflow="visible"
-                >
-                    <TouchableOpacity onPress={showDrawer}>
-                        <Box elevation={10} margin="m">
-                            <AntDesign
-                                name="menu-fold"
-                                size={30}
-                                color={theme.colors.primary1}
-                            />
-                        </Box>
-                    </TouchableOpacity>
-                    
+                <ScrollView>
+                    <Box
+                        flexDirection="row"
+                        alignItems="center"
+                        justifyContent="space-between"
+                        overflow="visible"
+                    >
+                        <TouchableOpacity onPress={showDrawer}>
+                            <Box elevation={10} margin="m">
+                                <AntDesign
+                                    name="menu-fold"
+                                    size={30}
+                                    color={theme.colors.primary1}
+                                />
+                            </Box>
+                        </TouchableOpacity>
+
                         <Avatar
-                            
                             margin="m"
                             size={40}
                             type="square"
@@ -76,13 +81,51 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                             }}
                         />
                     </Box>
-                <Hero
-                    margin="m"
-                    title="Hello Haytham!"
-                    subtitle="Let's find your dream job "
-                    searchValue={searchTerm}
-                    onChangeValue={(v) => setSearchTerm(v)}
-                />
+                    <Hero
+                        margin="m"
+                        title="Hello Haytham!"
+                        subtitle="Let's find your dream job "
+                        searchValue={searchTerm}
+                        onChangeValue={(v) => setSearchTerm(v)}
+                    />
+                    <Box marginVertical="m">
+                        <Box
+                            flexDirection="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            marginHorizontal="m"
+                            marginBottom="m"
+                        >
+                            <Text variant="headline4">Categories</Text>
+                            <TouchableOpacity>
+                                <Text variant="body2" color="primary1">
+                                    Sea all
+                                </Text>
+                            </TouchableOpacity>
+                        </Box>
+                        <Selectables
+                            value={category}
+                            items={[
+                                "Design",
+                                "finance",
+                                "Programming",
+                                "Architucture",
+                            ]}
+                            onChange={(v) => console.log(v)}
+                        />
+                    </Box>
+                    <Box marginVertical="m">
+                        <Box
+                            flexDirection="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            marginHorizontal="m"
+                            marginBottom="m"
+                        >
+                            <Text variant="headline4">Job offers</Text>
+                        </Box>
+                    </Box>
+                </ScrollView>
             </Layout>
         </>
     );
