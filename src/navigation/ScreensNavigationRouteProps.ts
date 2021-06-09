@@ -30,6 +30,14 @@ export type ProfileScreenNavigationProps = CompositeNavigationProp<
     StackNavigationProp<MainStackParamList, 'Profile'>,
     StackNavigationProp<AppStackParamList>
 >
+export type FavouriteScreenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<MainStackParamList, 'Favourites'>,
+    StackNavigationProp<AppStackParamList>
+>
+export type ApplicationScreenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<MainStackParamList, 'Applications'>,
+    StackNavigationProp<AppStackParamList>
+>
 //--------------------------------
 
 
@@ -47,6 +55,8 @@ export type RegisterScreenRouteProps = RouteProp<AuthStackParamList, 'Register'>
 export type HomeScreenRouteProps = RouteProp<MainStackParamList, 'Home'>
 export type JobDetailScreenRouteProps = RouteProp<MainStackParamList, 'Job_Detail'>
 export type ProfileScreenRouteProps = RouteProp<MainStackParamList, 'Profile'>
+export type FavouriteScreenRouteProps = RouteProp<MainStackParamList, 'Favourites'>
+export type ApplicationScreenRouteProps = RouteProp<MainStackParamList, 'Applications'>
 //-------------------------
 
 

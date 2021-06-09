@@ -2,6 +2,8 @@ import { TransitionPresets } from "@react-navigation/stack";
 import React from "react";
 
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import ApplicationScreen from "../screens/ApplicationScreen";
+import FavouriteScreen from "../screens/FavouriteScreen";
 import HomeScreen from "../screens/HomeScreen";
 import JobDetailScreen from "../screens/JobDetailScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -37,6 +39,8 @@ const MainFlow = () => {
         >
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen}  />
+            <Stack.Screen name="Favourites" component={FavouriteScreen}  />
+            <Stack.Screen name="Applications" component={ApplicationScreen}  />
             <Stack.Screen
                 name="Job_Detail"
                 component={JobDetailScreen}

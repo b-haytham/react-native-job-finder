@@ -15,6 +15,8 @@ export type AuthStackParamList = {
 export type MainStackParamList = {
     Home: undefined
     Profile: undefined
+    Favourites: undefined
+    Applications: undefined
     Job_Detail: {
         job: Job
     }
