@@ -20,6 +20,7 @@ export type Job = {
     highlights: string[],
     requirements: string[]
     categories: JobCategory[]
+    coordinates: {lat: number, lan: number}
 }
 
 export type JobCategory = {

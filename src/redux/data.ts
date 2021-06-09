@@ -40,6 +40,10 @@ export const JOBS: Job[] = [
             "Experience with 3D modeling, texturing, lighting and animation is a bonus",
         ],
         location: "Franklin Springs, GA",
+        coordinates: {
+            lat: 34.2838249,
+            lan: -83.1513202
+        },
         posted: "21 days ago",
     },
     {
@@ -49,7 +53,7 @@ export const JOBS: Job[] = [
             address: "San Antonio, TX 78209",
             image: "https://media.newjobs.com/mm/x695205hjsx/cp/christushealth.png",
         },
-        job_title: " Staff Accountant",
+        job_title: "Staff Accountant",
         salary: null,
         type: "Full time",
         categories: [{ id: 0, name: "Accountancy, banking and finance" }],
@@ -73,13 +77,17 @@ export const JOBS: Job[] = [
         ],
         location: "San Antonio, TX 78209",
         posted: "30 days ago",
+        coordinates: {
+            lat: 29.505999,
+            lan: -98.478814
+        }
     },
     {
         id: 2,
         company: {
             name: "Altec Industries, Inc.",
             address: "Birmingham, AL",
-            image: "https://media.newjobs.com/mm/x695205hjsx/cp/christushealth.png",
+            image: "https://media.newjobs.com/clu/xw16/xw161815644wx/branding/68877/Matrix-Precise-Inc-logo.png",
         },
         job_title: "Software Developer",
         salary: null,
@@ -110,6 +118,10 @@ export const JOBS: Job[] = [
         ],
         location: "Birmingham, AL",
         posted: "2 days ago",
+        coordinates: {
+            lat: 33.4810316,
+            lan: -86.8118254
+        }
     },
     {
         id: 3,
@@ -118,7 +130,7 @@ export const JOBS: Job[] = [
             address: "San Antonio, TX 78209",
             image: "https://media.newjobs.com/mm/x695205hjsx/cp/christushealth.png",
         },
-        job_title: " Staff Accountant",
+        job_title: "Staff Accountant",
         salary: null,
         type: "Full time",
         categories: [{ id: 0, name: "Accountancy, banking and finance" }],
@@ -142,13 +154,17 @@ export const JOBS: Job[] = [
         ],
         location: "San Antonio, TX 78209",
         posted: "30 days ago",
+        coordinates: {
+            lat: 34.2838249,
+            lan: -83.1513202
+        }
     },
     {
         id: 4,
         company: {
             name: "TEKsystems",
             address: "Hoboken, NJ",
-            image: "https://media.newjobs.com/mm/x695205hjsx/cp/christushealth.png",
+            image: "https://securemedia.newjobs.com/clu/xcyb/xcyberc3x/JobLogo.gif",
         },
         job_title: "Lead Front-End Engineer",
         salary: {
@@ -180,13 +196,17 @@ export const JOBS: Job[] = [
         ],
         location: "Hoboken, NJ",
         posted: "Today",
+        coordinates: {
+            lat: 33.47839,
+            lan: -87.869211
+        }
     },
     {
         id: 5,
         company: {
             name: "Matrix Precise, Inc.",
             address: "Oakland, CA 94612",
-            image: "https://media.newjobs.com/mm/x695205hjsx/cp/christushealth.png",
+            image: "https://media.newjobs.com/clu/xtpr/xtprox/branding/24443/Virtusa-logo-637497808963712225.png",
         },
         job_title: "React Front-End Engineer",
         salary: {
@@ -224,6 +244,10 @@ export const JOBS: Job[] = [
         ],
         location: "Oakland, CA",
         posted: "Today",
+        coordinates: {
+            lat: 37.3747442,
+            lan: -122.1160658
+        }
     },
 ];
 

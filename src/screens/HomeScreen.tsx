@@ -9,6 +9,7 @@ import {
     withTiming,
 } from "react-native-reanimated";
 import Avatar from "../components/Avatar";
+import SimpleJobCard from "../components/cards/SimpleJobCard";
 import Hero from "../components/Hero";
 import Layout from "../components/Layout";
 import BackDrop from "../components/Navigation/BackDrop";
@@ -19,6 +20,7 @@ import {
     HomeScreenNavigationProps,
     HomeScreenRouteProps,
 } from "../navigation/ScreensNavigationRouteProps";
+import { useAppSelector } from "../redux/store";
 import { Box, Text } from "../utils/restyle";
 import { Theme } from "../utils/theme";
 
@@ -31,6 +33,8 @@ const { width, height } = Dimensions.get("screen");
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     const theme = useTheme<Theme>();
+
+    const jobs = useAppSelector(state => state.jobs.job_list)
 
     // category state
     const [category, setCategory] = useState(null);
@@ -124,6 +128,16 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                         >
                             <Text variant="headline4">Job offers</Text>
                         </Box>
+                        {jobs.map(j => (
+                            <SimpleJobCard 
+                                key={j.id}
+                                job={j}
+                                onImagePress={() => navigation.navigate('Job_Detail', {job: j})}
+                                marginHorizontal='m'
+                                
+                                marginBottom='m'
+                            />
+                        ))}
                     </Box>
                 </ScrollView>
             </Layout>
