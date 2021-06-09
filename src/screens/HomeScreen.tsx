@@ -33,6 +33,7 @@ const { width, height } = Dimensions.get("screen");
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     const theme = useTheme<Theme>();
+    const current_user = useAppSelector(state => state.user.current_user)
 
     const jobs = useAppSelector(state => state.jobs.job_list)
 
@@ -71,19 +72,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                                 <AntDesign
                                     name="menu-fold"
                                     size={30}
-                                    color={theme.colors.primary1}
+                                    color={theme.colors.primary3}
                                 />
                             </Box>
                         </TouchableOpacity>
-
+                        <TouchableOpacity onPress={() =>navigation.navigate('Profile')}>
                         <Avatar
                             margin="m"
                             size={40}
                             type="square"
                             source={{
-                                uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
+                                uri: current_user!.image,
                             }}
                         />
+                        </TouchableOpacity>
                     </Box>
                     <Hero
                         margin="m"

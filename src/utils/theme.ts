@@ -107,14 +107,14 @@ const theme = createTheme({
     small: {
       fontFamily: "Poppins-Regular",
       fontSize: 11,
-      lineHeight: 11,
-      color: "black"
+      lineHeight: 15,
+      color: "black1"
     },
     smallGray: {
       fontFamily: "Poppins-Regular",
       fontSize: 11,
-      lineHeight: 11,
-      color: "black1"
+      lineHeight: 15,
+      color: "gray4"
     },
   }
 });

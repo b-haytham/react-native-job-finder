@@ -1,4 +1,4 @@
-import { Job, JobCategory } from "./data_types";
+import { Job, JobCategory, User } from "./data_types";
 
 export const JOBS: Job[] = [
     {
@@ -250,6 +250,44 @@ export const JOBS: Job[] = [
         }
     },
 ];
+
+export const CURRENT_USER: User = {
+    id: 0,
+    full_name: 'John Doe',
+    image: 'https://www.tekoway.com/wp-content/uploads/2018/12/John-Doe.jpg',
+    about: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos rem nisi quod ut, et pariatur assumenda vero neque iste perspiciatis.',
+    contact_info: {
+        email: 'John@doe.com',
+        phone: '+00184562546',
+    },
+    job_title: 'UX/UI Designer',
+    main_info: {
+        job_title: 'UX/UI Designer',
+        location: 'CA United states',
+        birth_day: 'May 16 1994' 
+    },
+    skills: ['Illustrator', 'Photoshop','Wireframing', 'Prototyping','Reactjs', 'Photoshop','Figma', 'Photoshop'],
+    work_experiences: [
+        {
+            position_title: 'UX/UI Designer',
+            where: 'Some Company',
+            duration: '2 years',
+            image: 'https://image.flaticon.com/icons/png/512/187/187879.png'
+        },
+        {
+            position_title: 'UX/UI Designer',
+            where: 'Some Company',
+            duration: '1 years',
+            image: 'https://image.flaticon.com/icons/png/512/3698/3698348.png'
+        },
+    ],
+    education: {
+        university_name: 'Academy of Art University',
+        degree_name: 'Graphic Design',
+        duration: '3 years'
+    }
+
+}
 
 export const CATEGORIES: JobCategory[] = [
     {

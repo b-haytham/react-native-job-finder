@@ -185,7 +185,7 @@ const JobDetailScreen: React.FC<JobDetailScreenProps> = ({
                     <Box marginTop="s">
                         {route.params.job.highlights.length > 0 &&
                             route.params.job.highlights.map((d, i) => (
-                                <JobRequirement marginVertical="s" text={d} />
+                                <JobRequirement key={i} marginVertical="s" text={d} />
                             ))}
                     </Box>
                 </Box>
@@ -194,7 +194,7 @@ const JobDetailScreen: React.FC<JobDetailScreenProps> = ({
                     <Box marginTop="s">
                         {route.params.job.requirements.length > 0 &&
                             route.params.job.requirements.map((d, i) => (
-                                <JobRequirement marginVertical="s" text={d} />
+                                <JobRequirement key={i} marginVertical="s" text={d} />
                             ))}
                     </Box>
                 </Box>

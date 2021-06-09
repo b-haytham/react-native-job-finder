@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { CURRENT_USER } from '../data'
+import { User } from '../data_types'
 
 // Define a type for the slice state
 interface UserState {
   loading: boolean
-  current_user: string | null
+  current_user: User | null
   error: string | null
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
   loading: false,
-  current_user: null,
+  current_user: CURRENT_USER,
   error: null
 }
 

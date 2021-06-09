@@ -26,6 +26,10 @@ export type JobDetailScreenNavigationProps = CompositeNavigationProp<
     StackNavigationProp<MainStackParamList, 'Job_Detail'>,
     StackNavigationProp<AppStackParamList>
 >
+export type ProfileScreenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<MainStackParamList, 'Profile'>,
+    StackNavigationProp<AppStackParamList>
+>
 //--------------------------------
 
 
@@ -42,6 +46,7 @@ export type RegisterScreenRouteProps = RouteProp<AuthStackParamList, 'Register'>
 //main stack route props 
 export type HomeScreenRouteProps = RouteProp<MainStackParamList, 'Home'>
 export type JobDetailScreenRouteProps = RouteProp<MainStackParamList, 'Job_Detail'>
+export type ProfileScreenRouteProps = RouteProp<MainStackParamList, 'Profile'>
 //-------------------------
 
 

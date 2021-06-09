@@ -23,6 +23,32 @@ export type Job = {
     coordinates: {lat: number, lan: number}
 }
 
+export type User = {
+    id: number
+    image: string
+    full_name: string,
+    job_title: string,
+    main_info: {
+        job_title: string
+        location: string
+        birth_day: string
+    },
+    contact_info: {
+        email: string
+        phone: string
+        facebook?: string
+        tweeter?: string
+    },
+    about: string
+    work_experiences: {position_title: string, where: string, image?: string, duration: string}[]
+    skills: string[]
+    education: {
+        university_name: string
+        degree_name: string
+        duration: string
+    }
+}
+
 export type JobCategory = {
     id: number
     name: string
