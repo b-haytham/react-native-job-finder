@@ -38,6 +38,10 @@ export type ApplicationScreenNavigationProps = CompositeNavigationProp<
     StackNavigationProp<MainStackParamList, 'Applications'>,
     StackNavigationProp<AppStackParamList>
 >
+export type CategoriesScreenNavigationProps = CompositeNavigationProp<
+    StackNavigationProp<MainStackParamList, 'Categories'>,
+    StackNavigationProp<AppStackParamList>
+>
 //--------------------------------
 
 
@@ -57,6 +61,7 @@ export type JobDetailScreenRouteProps = RouteProp<MainStackParamList, 'Job_Detai
 export type ProfileScreenRouteProps = RouteProp<MainStackParamList, 'Profile'>
 export type FavouriteScreenRouteProps = RouteProp<MainStackParamList, 'Favourites'>
 export type ApplicationScreenRouteProps = RouteProp<MainStackParamList, 'Applications'>
+export type CategoriesScreenRouteProps = RouteProp<MainStackParamList, 'Categories'>
 //-------------------------
 
 

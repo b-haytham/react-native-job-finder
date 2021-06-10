@@ -17,6 +17,7 @@ export type MainStackParamList = {
     Profile: undefined
     Favourites: undefined
     Applications: undefined
+    Categories: undefined
     Job_Detail: {
         job: Job
     }

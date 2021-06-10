@@ -3,6 +3,7 @@ import React from "react";
 
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import ApplicationScreen from "../screens/ApplicationScreen";
+import CategoriesScreen from "../screens/CategoriesScreen";
 import FavouriteScreen from "../screens/FavouriteScreen";
 import HomeScreen from "../screens/HomeScreen";
 import JobDetailScreen from "../screens/JobDetailScreen";
@@ -41,6 +42,7 @@ const MainFlow = () => {
             <Stack.Screen name="Profile" component={ProfileScreen}  />
             <Stack.Screen name="Favourites" component={FavouriteScreen}  />
             <Stack.Screen name="Applications" component={ApplicationScreen}  />
+            <Stack.Screen name="Categories" component={CategoriesScreen}  />
             <Stack.Screen
                 name="Job_Detail"
                 component={JobDetailScreen}

@@ -104,7 +104,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                             marginBottom="m"
                         >
                             <Text variant="headline4">Categories</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('Categories')}>
                                 <Text variant="body2" color="primary1">
                                     Sea all
                                 </Text>
