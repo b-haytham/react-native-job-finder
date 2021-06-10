@@ -2,6 +2,9 @@ import { CompositeNavigationProp, RouteProp } from "@react-navigation/core"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { AppStackParamList, AuthStackParamList, MainStackParamList } from "./ParamListTypes"
 
+export type OnBoardingScreenNavigationProps = StackNavigationProp<AppStackParamList, 'OnBoarding'>
+export type OnBoardingScreenRouteProps = RouteProp<AppStackParamList, 'OnBoarding'>
+
 //--------------------------
 // auth stack navigation props
 export type LoginScreenNavigationProps = CompositeNavigationProp<

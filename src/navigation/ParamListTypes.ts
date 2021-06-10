@@ -2,6 +2,7 @@ import { NavigatorScreenParams } from "@react-navigation/core"
 import { Job, JobCategory } from "../redux/data_types"
 
 export type AppStackParamList = {
+    OnBoarding: undefined
     Auth: NavigatorScreenParams<AuthStackParamList>
     Main: NavigatorScreenParams<MainStackParamList>
 }
