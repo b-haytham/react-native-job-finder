@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JOBS } from "../data";
 import { Job } from "../data_types";
 
@@ -25,9 +25,21 @@ const favouriteSlice = createSlice({
     name: "favourites",
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
-    reducers: {},
+    reducers: {
+        addToFavorite(state, action: PayloadAction<Job>) {
+            state.favourite_list.push(action.payload)
+            state.jobs_in_favourite.push(action.payload.id)
+        },
+        removeFromFavourite(state, action: PayloadAction<number>) {
+            state.favourite_list = state.favourite_list.filter(f => f.id !==action.payload)
+            state.jobs_in_favourite = state.jobs_in_favourite.filter(f => f !== action.payload)  
+        }
+    },
 });
 
-export const {} = favouriteSlice.actions;
+export const {
+    addToFavorite,
+    removeFromFavourite
+} = favouriteSlice.actions;
 
 export default favouriteSlice.reducer;
