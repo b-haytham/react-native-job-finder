@@ -64,7 +64,8 @@ const ApplicationScreen: React.FC<ApplicationScreenProps> = ({navigation, route}
                         }}
                     >
                         <MainJobCard
-                            margin='m' 
+                            marginHorizontal='m'
+                            marginVertical='s' 
                             status={a.status}
                             job={a.job}
                         />

@@ -19,6 +19,9 @@ import { Theme } from "../utils/theme";
 
 import Constants from 'expo-constants'
 import Animated, { Extrapolate, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { addToFavorite } from "../redux/favourite/favouriteSlice";
+import { createApplication } from "../redux/applications/applicationSlice";
 
 interface JobDetailScreenProps {
     navigation: JobDetailScreenNavigationProps;
@@ -34,6 +37,9 @@ const JobDetailScreen: React.FC<JobDetailScreenProps> = ({
     route,
 }) => {
     const theme = useTheme<Theme>();
+    const dispatch = useAppDispatch()
+    const jobs_in_favourite = useAppSelector(state => state.favourites.jobs_in_favourite)
+    const jobs_in_application = useAppSelector(state => state.applications.jobs_applied)
 
     const scrollY = useSharedValue(0)
 
@@ -199,7 +205,7 @@ const JobDetailScreen: React.FC<JobDetailScreenProps> = ({
                     </Box>
                 </Box>
             </Animated.ScrollView>
-            <Box
+            {!(jobs_in_application.includes(route.params.job.id) && jobs_in_favourite.includes(route.params.job.id)) && <Box
                 height={70}
                 width={width}
                 bg="white"
@@ -207,7 +213,7 @@ const JobDetailScreen: React.FC<JobDetailScreenProps> = ({
                 paddingHorizontal="m"
                 alignItems="center"
             >
-                <Box
+                {!jobs_in_favourite.includes(route.params.job.id) && <Box
                     width={50}
                     height={50}
                     bg="primary3"
@@ -216,18 +222,19 @@ const JobDetailScreen: React.FC<JobDetailScreenProps> = ({
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => dispatch(addToFavorite(route.params.job))}>
                         <Fontisto
                             name="favorite"
                             size={30}
                             color={theme.colors.white}
                         />
                     </TouchableOpacity>
-                </Box>
+                </Box>}
+                {!jobs_in_application.includes(route.params.job.id) &&
                 <Box flexGrow={1} elevation={10}>
-                    <Button title="Apply" onPress={() => {}} />
-                </Box>
-            </Box>
+                    <Button title="Apply" onPress={() => dispatch(createApplication(route.params.job))} />
+                </Box>}
+            </Box>}
         </Layout>
     );
 };

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JOBS } from "../data";
 import { Job } from "../data_types";
 
@@ -36,9 +36,16 @@ export const applicationSlice = createSlice({
     name: "applications",
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
-    reducers: {},
+    reducers: {
+        createApplication(state, action: PayloadAction<Job>) {
+            state.application_list.push({job: action.payload, status: 'Pending'})
+            state.jobs_applied.push(action.payload.id)
+        }
+    },
 });
 
-export const {} = applicationSlice.actions;
+export const {
+    createApplication
+} = applicationSlice.actions;
 
 export default applicationSlice.reducer;
