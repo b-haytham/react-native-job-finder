@@ -45,7 +45,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     const [searchTerm, setSearchTerm] = useState("");
     // search state
 
-    const drawerTranslateX = useSharedValue(-width * 0.61);
+    const drawerTranslateX = useSharedValue(-width * 0.7);
 
     const showDrawer = () => {
         drawerTranslateX.value = withTiming(0);
@@ -54,9 +54,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     return (
         <>
             <Drawer
-                width={width * 0.6}
+                width={width * 0.7}
                 height={height}
                 translationX={drawerTranslateX}
+                navigation={navigation}
             />
             {/* <BackDrop width={width} height={height}  onPress={() => {console.log('Pressed')}} /> */}
             <Layout bg="gray1">

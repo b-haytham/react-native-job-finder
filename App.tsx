@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import { AntDesign, FontAwesome5, Fontisto, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign, Feather, FontAwesome5, Fontisto, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 export default function App() {
 
@@ -19,6 +19,7 @@ export default function App() {
         ...FontAwesome5.font,
         ...MaterialCommunityIcons.font,
         ...Fontisto.font,
+        ...Feather.font,
         'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
         'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
         'Poppins-Medium': require('./assets/fonts/Poppins-Medium.ttf'),
