@@ -14,14 +14,7 @@ import { useTheme } from "@shopify/restyle";
 import { Theme } from "../utils/theme";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import SimpleJobCard from "../components/cards/SimpleJobCard";
-import Animated, {
-    Easing,
-    runOnJS,
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring,
-    withTiming,
-} from "react-native-reanimated";
+
 import { removeFromFavourite } from "../redux/favourite/favouriteSlice";
 
 import { AnimatePresence, MotiView } from "moti";
@@ -30,9 +23,6 @@ interface FavouriteScreenProps {
     navigation: FavouriteScreenNavigationProps;
     route: FavouriteScreenRouteProps;
 }
-const AnimatedBox = Animated.createAnimatedComponent(Box);
-
-const { width, height } = Dimensions.get("screen");
 
 const FavouriteScreen: React.FC<FavouriteScreenProps> = ({
     navigation,
