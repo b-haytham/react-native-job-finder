@@ -4,9 +4,11 @@ import { Dimensions, TouchableOpacity } from "react-native"
 import { BoxProps } from "@shopify/restyle"
 import { Box, Text } from "../../utils/restyle"
 import { Theme } from "../../utils/theme"
+import { SharedElement } from "react-navigation-shared-element"
+import { JobCategory } from "../../redux/data_types"
 
 interface CategoryCardProps extends BoxProps<Theme> {
-    title: string
+    category: JobCategory
     icon?: ReactNode
     selected?: boolean 
     width: number
@@ -15,7 +17,7 @@ interface CategoryCardProps extends BoxProps<Theme> {
 }
 
 
-const CategoryCard: React.FC<CategoryCardProps> = ({onPress, selectable, width, title, icon, selected, ...rest}) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({onPress, selectable, width, category, icon, selected, ...rest}) => {
     const [isSelected, setIsSelected] = useState(selected ? true : false)
     return (
         <TouchableOpacity onPress={() => {
@@ -26,7 +28,6 @@ const CategoryCard: React.FC<CategoryCardProps> = ({onPress, selectable, width, 
             }
         }}>
         <Box 
-            elevation={10}
             borderWidth={2}
             width={width }
             minHeight={200}
@@ -38,7 +39,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({onPress, selectable, width, 
             justifyContent='center'
             alignItems='center'
         >
-            <Text textAlign='center' variant='body2' color={isSelected ? 'white' : 'primary1'}>{title}</Text>
+            <SharedElement id={`category-${category.id}`}>
+
+            <Text textAlign='center' variant='body2' color={isSelected ? 'white' : 'primary1'}>{category.name}</Text>
+            </SharedElement>
         </Box>
         </TouchableOpacity>
     )

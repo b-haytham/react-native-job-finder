@@ -1,7 +1,7 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useTheme } from "@shopify/restyle";
 import React, { useState } from "react";
-import { Dimensions, Pressable, ScrollView, StyleSheet } from "react-native";
+import { Dimensions, FlatList, Pressable, ScrollView, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
     useSharedValue,
@@ -9,8 +9,10 @@ import {
     withTiming,
 } from "react-native-reanimated";
 import Avatar from "../components/Avatar";
+import CategoryCard from "../components/cards/CategoryCard";
 import SimpleJobCard from "../components/cards/SimpleJobCard";
 import Hero from "../components/Hero";
+import HiddenView from "../components/HiddenView";
 import Layout from "../components/Layout";
 import BackDrop from "../components/Navigation/BackDrop";
 import Drawer from "../components/Navigation/Drawer";
@@ -20,7 +22,8 @@ import {
     HomeScreenNavigationProps,
     HomeScreenRouteProps,
 } from "../navigation/ScreensNavigationRouteProps";
-import { useAppSelector } from "../redux/store";
+import { JobCategory } from "../redux/data_types";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { Box, Text } from "../utils/restyle";
 import { Theme } from "../utils/theme";
 
@@ -30,9 +33,14 @@ interface HomeScreenProps {
 }
 
 const { width, height } = Dimensions.get("screen");
+const HIDDEN_VIEW_HEIGHT = height * .9
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     const theme = useTheme<Theme>();
+    
+    const hiddenViewTranslateY = useSharedValue(HIDDEN_VIEW_HEIGHT)
+
+    const categories = useAppSelector(state => state.categories.category_list)
     const current_user = useAppSelector(state => state.user.current_user)
 
     const jobs = useAppSelector(state => state.jobs.job_list)
@@ -51,8 +59,34 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
         drawerTranslateX.value = withTiming(0);
     };
 
+
+
     return (
         <>
+            <HiddenView 
+                width={width}
+                height={HIDDEN_VIEW_HEIGHT}
+                component={<FlatList
+                    keyExtractor={(item: JobCategory) => item.id.toString()}
+                    style={{ alignSelf: "center" }}
+                    data={categories}
+                    numColumns={2}
+                    renderItem={({ item }: { item: JobCategory }) => (
+                        
+                            <CategoryCard
+                                onPress={() =>
+                                    navigation.navigate("Job_Listing", {
+                                        category: item,
+                                    })
+                                }
+                                width={width / 2 - theme.spacing.m}
+                                category={item}
+                            />
+                        
+                    )}
+                />}
+                translateY={hiddenViewTranslateY}
+            />
             <Drawer
                 width={width * 0.7}
                 height={height}
@@ -104,7 +138,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                             marginBottom="m"
                         >
                             <Text variant="headline4">Categories</Text>
-                            <TouchableOpacity onPress={() => navigation.navigate('Categories')}>
+                            <TouchableOpacity onPress={() => hiddenViewTranslateY.value = 0}>
                                 <Text variant="body2" color="primary1">
                                     Sea all
                                 </Text>
