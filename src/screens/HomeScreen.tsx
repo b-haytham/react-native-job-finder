@@ -71,7 +71,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
 
     return (
         <>
-            <HiddenView
+           {display && <HiddenView
                 width={width}
                 height={HIDDEN_VIEW_HEIGHT}
                 component={
@@ -94,7 +94,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                     />
                 }
                 translateY={hiddenViewTranslateY}
-            />
+            />}
             <Drawer
                 width={width * 0.7}
                 height={height}

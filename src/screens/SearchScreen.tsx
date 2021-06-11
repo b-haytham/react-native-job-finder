@@ -19,6 +19,7 @@ interface SearchScreenProps {
     route: SearchScreenRouteProps;
 }
 
+
 const { width, height } = Dimensions.get('screen')
 const FILTER_VIEW_HEIGHT = height * .8
 

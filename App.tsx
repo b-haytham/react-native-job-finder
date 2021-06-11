@@ -2,7 +2,7 @@ import 'react-native-reanimated'
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { } from "react-native";
+import { LogBox } from "react-native";
 
 import Navigation from "./src/navigation";
 
@@ -11,6 +11,8 @@ import store from "./src/redux/store";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { AntDesign, Feather, FontAwesome5, Fontisto, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+
+LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 export default function App() {
 
