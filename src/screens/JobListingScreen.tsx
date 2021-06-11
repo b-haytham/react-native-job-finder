@@ -35,7 +35,7 @@ const JobListingScreen: React.FC<JobListingScreenProps> = ({
         (j) => j.categories[0].name === route.params.category?.name
     );
     return (
-        <Layout no_padding_top>
+        <Layout no_padding_top bg={jobs.length > 0 ? "background" : "white"}>
             <Box
                 borderBottomLeftRadius="l"
                 borderBottomRightRadius="l"
@@ -77,9 +77,9 @@ const JobListingScreen: React.FC<JobListingScreenProps> = ({
                     </TouchableOpacity>
                 </Box>
             </Box>
-            <ScrollView contentContainerStyle={{ paddingTop: 20 }}>
+            <ScrollView contentContainerStyle={{ flex: 1, paddingTop: 20 }}>
                 <AnimatePresence>
-                    {jobs.length > 0 &&
+                    {jobs.length > 0 ? (
                         jobs.map((j) => (
                             <MotiView
                                 key={j.id}
@@ -105,7 +105,33 @@ const JobListingScreen: React.FC<JobListingScreenProps> = ({
                                     }
                                 />
                             </MotiView>
-                        ))}
+                        ))
+                    ) : (
+                        <MotiView
+                            from={{
+                                opacity: 0,
+                            }}
+                            animate={{ opacity: 1 }}
+                            delay={300}
+                        >
+                            <Box flex={1} alignItems="center">
+                                <Image
+                                    style={{
+                                        width: width * 0.6,
+                                        height: width * 0.6,
+                                    }}
+                                    resizeMode="contain"
+                                    source={require("../../assets/empty.png")}
+                                />
+                                <Text textAlign="center" variant="description">
+                                    Sorry!, No jobs for
+                                </Text>
+                                <Text textAlign="center" variant="description">
+                                    {route.params.category?.name}
+                                </Text>
+                            </Box>
+                        </MotiView>
+                    )}
                 </AnimatePresence>
             </ScrollView>
         </Layout>

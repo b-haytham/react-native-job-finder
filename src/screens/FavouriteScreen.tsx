@@ -18,11 +18,14 @@ import SimpleJobCard from "../components/cards/SimpleJobCard";
 import { removeFromFavourite } from "../redux/favourite/favouriteSlice";
 
 import { AnimatePresence, MotiView } from "moti";
+import { Image } from "react-native";
 
 interface FavouriteScreenProps {
     navigation: FavouriteScreenNavigationProps;
     route: FavouriteScreenRouteProps;
 }
+
+const { width, height } = Dimensions.get("screen");
 
 const FavouriteScreen: React.FC<FavouriteScreenProps> = ({
     navigation,
@@ -35,7 +38,10 @@ const FavouriteScreen: React.FC<FavouriteScreenProps> = ({
     );
 
     return (
-        <Layout no_padding_top>
+        <Layout
+            no_padding_top
+            bg={favourites_list.length > 0 ? "background" : "white"}
+        >
             <Box
                 paddingHorizontal="m"
                 style={{
@@ -60,41 +66,67 @@ const FavouriteScreen: React.FC<FavouriteScreenProps> = ({
             </Box>
             <ScrollView>
                 <AnimatePresence>
-                    {favourites_list.map((f) => {
-                        return (
-                            <MotiView
-                                key={f.id}
-                                from={{
-                                    opacity: 0,
-                                    translateX: -50,
-                                }}
-                                animate={{
-                                    opacity: 1,
-                                    translateX: 0,
-                                }}
-                                exit={{
-                                    opacity: 0,
-                                }}
-                            >
-                                <SimpleJobCard
-                                    marginHorizontal="m"
-                                    marginVertical="s"
+                    {favourites_list.length > 0 ? (
+                        favourites_list.map((f) => {
+                            return (
+                                <MotiView
                                     key={f.id}
-                                    flexGrow={1}
-                                    job={f}
-                                    onImagePress={() =>
-                                        navigation.navigate("Job_Detail", {
-                                            job: f,
-                                        })
-                                    }
-                                    in_favourite
-                                    onDelete={() =>
-                                        dispatch(removeFromFavourite(f.id))
-                                    }
+                                    from={{
+                                        opacity: 0,
+                                        translateX: -50,
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        translateX: 0,
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                    }}
+                                >
+                                    <SimpleJobCard
+                                        marginHorizontal="m"
+                                        marginVertical="s"
+                                        key={f.id}
+                                        flexGrow={1}
+                                        job={f}
+                                        onImagePress={() =>
+                                            navigation.navigate("Job_Detail", {
+                                                job: f,
+                                            })
+                                        }
+                                        in_favourite
+                                        onDelete={() =>
+                                            dispatch(removeFromFavourite(f.id))
+                                        }
+                                    />
+                                </MotiView>
+                            );
+                        })
+                    ) : (
+                        <MotiView
+                            from={{
+                                opacity: 0,
+                            }}
+                            animate={{
+                                opacity: 1,
+                            }}
+                            delay={300}
+                        >
+                            <Box flex={1} alignItems="center">
+                                <Image
+                                    style={{
+                                        width: width * 0.6,
+                                        height: width * 0.6,
+                                    }}
+                                    resizeMode="contain"
+                                    source={require("../../assets/empty.png")}
                                 />
-                            </MotiView>
-                        );
-                    })}
+                                <Text textAlign="center" variant="description">
+                                    Sorry!, Empty List
+                                </Text>
+                            </Box>
+                        </MotiView>
+                    )}
                 </AnimatePresence>
             </ScrollView>
         </Layout>

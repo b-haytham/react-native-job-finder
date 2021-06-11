@@ -1,4 +1,4 @@
-import 'react-native-reanimated'
+import "react-native-reanimated";
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -10,11 +10,24 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import { AntDesign, Feather, FontAwesome5, Fontisto, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {
+    AntDesign,
+    Feather,
+    FontAwesome5,
+    Fontisto,
+    MaterialCommunityIcons,
+    MaterialIcons,
+} from "@expo/vector-icons";
+import { useAssets } from "expo-asset";
 
-LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
 
 export default function App() {
+    const [assets] = useAssets([
+        require("./assets/empty.png"),
+        require("./assets/resume.png"),
+        require("./assets/job-offers.png"),
+    ]);
 
     const [fontsLoaded] = useFonts({
         ...AntDesign.font,
@@ -23,17 +36,17 @@ export default function App() {
         ...MaterialCommunityIcons.font,
         ...Fontisto.font,
         ...Feather.font,
-        'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
-        'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
-        'Poppins-Medium': require('./assets/fonts/Poppins-Medium.ttf'),
-        'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
-        'Poppins-Thin': require('./assets/fonts/Poppins-Thin.ttf'),
-        'Poppins-Italic': require('./assets/fonts/Poppins-Italic.ttf'),
-    })
+        "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+        "Poppins-SemiBold": require("./assets/fonts/Poppins-SemiBold.ttf"),
+        "Poppins-Medium": require("./assets/fonts/Poppins-Medium.ttf"),
+        "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+        "Poppins-Thin": require("./assets/fonts/Poppins-Thin.ttf"),
+        "Poppins-Italic": require("./assets/fonts/Poppins-Italic.ttf"),
+    });
 
-    if(!fontsLoaded) {
-        return <AppLoading />
-    }else {
+    if (!fontsLoaded || !assets) {
+        return <AppLoading />;
+    } else {
         return (
             <Provider store={store}>
                 <Navigation />
@@ -41,5 +54,4 @@ export default function App() {
             </Provider>
         );
     }
-
 }

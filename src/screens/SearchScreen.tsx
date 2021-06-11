@@ -1,6 +1,8 @@
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTheme } from "@shopify/restyle";
+import { MotiView } from "moti";
 import React, { useEffect, useState } from "react";
+import { Image } from "react-native";
 import { Dimensions, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSharedValue, withDelay } from "react-native-reanimated";
@@ -19,33 +21,36 @@ interface SearchScreenProps {
     route: SearchScreenRouteProps;
 }
 
-
-const { width, height } = Dimensions.get('screen')
-const FILTER_VIEW_HEIGHT = height * .8
+const { width, height } = Dimensions.get("screen");
+const FILTER_VIEW_HEIGHT = height * 0.8;
 
 const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
     const theme = useTheme<Theme>();
-    const [seachTerm, setSearchTerm] = useState(route.params.search_term ? route.params.search_term : '');
+    const [seachTerm, setSearchTerm] = useState(
+        route.params.search_term ? route.params.search_term : ""
+    );
 
-    const filterViewTranslateY = useSharedValue(FILTER_VIEW_HEIGHT)
+    const filterViewTranslateY = useSharedValue(FILTER_VIEW_HEIGHT);
 
     useEffect(() => {
-        if(route.params.show_filters) {
+        if (route.params.show_filters) {
             setTimeout(() => {
-                filterViewTranslateY.value =  0 
-            }, 500)
+                filterViewTranslateY.value = 0;
+            }, 500);
         }
-    },[route.params.show_filters])
+    }, [route.params.show_filters]);
 
     return (
-        <Layout >
-        <FilterView 
-            onApply={() => filterViewTranslateY.value = FILTER_VIEW_HEIGHT}
-            zIndex={5000}
-            translateY={filterViewTranslateY}
-            width={width}
-            height={FILTER_VIEW_HEIGHT}
-        />
+        <Layout bg='white'>
+            <FilterView
+                onApply={() =>
+                    (filterViewTranslateY.value = FILTER_VIEW_HEIGHT)
+                }
+                zIndex={5000}
+                translateY={filterViewTranslateY}
+                width={width}
+                height={FILTER_VIEW_HEIGHT}
+            />
             <SharedElement id="search">
                 <Box
                     margin="m"
@@ -82,9 +87,11 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
                             />
                         </Box>
                         <Box marginLeft="m" p="s" bg="white" borderRadius="s">
-                            <TouchableOpacity onPress={() => {
-                                filterViewTranslateY.value = 0
-                            }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    filterViewTranslateY.value = 0;
+                                }}
+                            >
                                 <MaterialCommunityIcons
                                     name="format-list-bulleted-type"
                                     size={24}
@@ -95,6 +102,27 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
                     </Box>
                 </Box>
             </SharedElement>
+            <MotiView
+                from={{
+                    opacity: 0,
+                }}
+                animate={{ opacity: 1 }}
+                delay={300}
+            >
+                <Box flex={1} alignItems="center">
+                    <Image
+                        style={{
+                            width: width * 0.6,
+                            height: width * 0.6,
+                        }}
+                        resizeMode="contain"
+                        source={require("../../assets/empty.png")}
+                    />
+                    <Text textAlign="center" variant="description">
+                        Start Typing!!
+                    </Text>
+                </Box>
+            </MotiView>
         </Layout>
     );
 };
