@@ -186,7 +186,7 @@ const JobDetailScreen: React.FC<JobDetailScreenProps> = ({
                             ))}
                     </Box>
                 </Box>
-                <Box marginTop="l" marginHorizontal="m">
+                <Box marginTop="l" marginHorizontal="m" >
                     <Text variant="body2">Job Highlight</Text>
                     <Box marginTop="s">
                         {route.params.job.highlights.length > 0 &&

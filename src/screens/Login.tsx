@@ -1,127 +1,214 @@
-import React from "react";
-import { StyleSheet, View, ScrollView, Button, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { Dimensions, KeyboardAvoidingView, Platform } from "react-native";
 
-import Constants from "expo-constants";
 import {
     LoginScreenNavigationProps,
     LoginScreenRouteProps,
 } from "../navigation/ScreensNavigationRouteProps";
 import { Box, Text } from "../utils/restyle";
-import { useAppSelector } from "../redux/store";
-import SimpleJobCard from "../components/cards/SimpleJobCard";
-import MainJobCard from "../components/cards/MainJobCard";
-import { useSharedValue } from "react-native-reanimated";
-import FilterView from "../components/FilterView";
+import Layout from "../components/Layout";
 
+import Constants from "expo-constants";
+import Button from "../components/forms/form_elements/Button";
+import { useTheme } from "@shopify/restyle";
+import { Theme } from "../utils/theme";
+import Input from "../components/forms/form_elements/Input";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { AntDesign, Entypo, Feather } from "@expo/vector-icons";
+
+import * as Yup from "yup";
+import { useFormik } from "formik";
+
+const loginSchema = Yup.object().shape({
+    password: Yup.string()
+        .min(2, "Too Short!")
+        .max(50, "Too Long!")
+        .required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
+});
 interface LoginProps {
     navigation: LoginScreenNavigationProps;
     route: LoginScreenRouteProps;
 }
 
-const { width, height } = Dimensions.get('screen')
-const FILTER_VIEW_HEIGHT = height * .9
+const { width, height } = Dimensions.get("screen");
+
+const HEADER_HEIGHT = height * 0.3;
 
 const Login: React.FC<LoginProps> = ({ navigation, route }) => {
-    const jobs = useAppSelector(state => state.jobs.job_list)
-    const filterViewTranslateY = useSharedValue(FILTER_VIEW_HEIGHT)
-    return (
-        <View style={styles.container}>
-            <ScrollView>
-                <Button title='Home' onPress={() => navigation.navigate('Main', {screen: 'Home'})} />
-            <Box
-                    borderRadius="l"
-                    elevation={30}
-                    margin="xl"
-                    padding="xl"
-                    bg='primaryDarker'
-                ></Box>
-                <Box
-                    borderRadius="l"
-                    elevation={30}
-                    margin="xl"
-                    padding="xl"
-                    bg="primary1"
-                ></Box>
-                <Box
-                    borderRadius="l"
-                    elevation={30}
-                    margin="xl"
-                    padding="xl"
-                    bg="primary2"
-                ></Box>
-                <Box
-                    borderRadius="l"
-                    elevation={30}
-                    margin="xl"
-                    padding="xl"
-                    bg="primary3"
-                ></Box>
-                <Box borderRadius="l" margin="xl" padding="xl" bg="gray1"></Box>
-                <Box borderRadius="l" margin="xl" padding="xl" bg="gray2"></Box>
-                <Box borderRadius="l" margin="xl" padding="xl" bg="gray3"></Box>
-                <Box borderRadius="l" margin="xl" padding="xl" bg="gray4"></Box>
-                <Box
-                    borderRadius="l"
-                    margin="xl"
-                    padding="xl"
-                    bg="black1"
-                ></Box>
-                <Box
-                    borderRadius="l"
-                    margin="xl"
-                    padding="xl"
-                    bg="black2"
-                ></Box>
-                <Box
-                    borderRadius="l"
-                    margin="xl"
-                    padding="xl"
-                    bg="black3"
-                ></Box>
-                <Box
-                    borderRadius="l"
-                    margin="xl"
-                    padding="xl"
-                    bg="black4"
-                ></Box>
+    const theme = useTheme<Theme>();
 
-               <Box
-                margin="xl"
-                padding="xl"
-               >
-                   <Text variant='headline' >Headline</Text>
-                   <Text variant='headline2' >Headline 2</Text>
-                   <Text variant='headline3' >Headline 3</Text>
-                   <Text variant='body' >Body</Text>
-                   <Text variant='body2' >Body 2</Text>
-                   <Text variant='description' >Desciption</Text>
-               </Box>
-               <Box 
-                   m='m' 
-               >
-                
-                   <SimpleJobCard  job={jobs[0]} />
-               </Box>
-               <Box
-                 m='m'      
-               >
-                   <MainJobCard  job={jobs[0]} />
-               </Box>
-               <Box>
-                   <Button title='Filter' onPress={() => filterViewTranslateY.value = 0} />
-               </Box>
-            </ScrollView>
-            <FilterView width={width} height={FILTER_VIEW_HEIGHT} translateY={filterViewTranslateY} />
-        </View>
+    const formik = useFormik({
+        initialValues: {
+            email: "John@doe.com",
+            password: "password",
+        },
+        validationSchema: loginSchema,
+        onSubmit: (values) => navigation.navigate('Main', {screen: 'Home'}),
+    });
+
+    console.log(formik.errors);
+
+    return (
+        <Layout no_padding_top>
+            <Box
+                width={width}
+                height={HEADER_HEIGHT}
+                bg="primary1"
+                style={{ borderBottomRightRadius: width / 2 }}
+            >
+                <Box
+                    position="absolute"
+                    top={HEADER_HEIGHT / 2 - Constants.statusBarHeight}
+                    left={theme.spacing.m}
+                >
+                    <Text variant="headline" color="white">
+                        Welcome!
+                    </Text>
+                    <Text variant="headline4" color="white">
+                        Login
+                    </Text>
+                </Box>
+            </Box>
+
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+            >
+                <ScrollView>
+                    <Box marginHorizontal="m" marginTop="m">
+                        <Input
+                            error={formik.errors.email}
+                            marginBottom="s"
+                            onBlur={formik.handleBlur("email")}
+                            textInputProps={{
+                                placeholderTextColor: theme.colors.gray4,
+                                placeholder: "E mail",
+                                keyboardType: "email-address",
+                                value: formik.values.email,
+                                onChangeText: (text) =>
+                                    formik.handleChange("email")(text),
+                            }}
+                            left_icon={
+                                <Feather
+                                    name="mail"
+                                    size={24}
+                                    color={theme.colors.primary1}
+                                />
+                            }
+                            right_icon={
+                                formik.errors.email ? (
+                                    <Box
+                                        width={20}
+                                        height={20}
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        bg='error'
+                                        style={{ borderRadius: 10 }}
+                                    >
+                                        <Entypo
+                                            name="cross"
+                                            size={20}
+                                            color={theme.colors.white}
+                                        />
+                                    </Box>
+                                ) : (
+                                    <Box
+                                        width={20}
+                                        height={20}
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        bg='primary1'
+                                        style={{ borderRadius: 10 }}
+                                    >
+                                    <AntDesign
+                                        name="check"
+                                        size={20}
+                                        color={theme.colors.white}
+                                    />
+                                    </Box>
+                                )
+                            }
+                        />
+                        
+                        <Input
+                            error={formik.errors.password}
+                            left_icon={
+                                <Feather
+                                    name="lock"
+                                    size={24}
+                                    color={theme.colors.primary1}
+                                />
+                            }
+                            marginBottom="s"
+                            secureTextEntry
+                            onBlur={formik.handleBlur("password")}
+                            textInputProps={{
+                                placeholder: "Password",
+                                placeholderTextColor: theme.colors.gray4,
+                                value: formik.values.password,
+                                onChangeText: (text) =>
+                                    formik.handleChange("password")(text),
+                            }}
+                            right_icon={
+                                formik.errors.password ? (
+                                    <Box
+                                        width={20}
+                                        height={20}
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        bg='error'
+                                        style={{ borderRadius: 10 }}
+                                    >
+                                        <Entypo
+                                            name="cross"
+                                            size={20}
+                                            color={theme.colors.white}
+                                        />
+                                    </Box>
+                                ) : (
+                                    <Box
+                                        width={20}
+                                        height={20}
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        bg='primary1'
+                                        style={{ borderRadius: 10 }}
+                                    >
+                                    <AntDesign
+                                        name="check"
+                                        size={20}
+                                        color={theme.colors.white}
+                                    />
+                                    </Box>
+                                )
+                            }
+                        />
+                        
+                        <Button
+                            marginTop='m'
+                            title="Login"
+                            onPress={
+                                formik.handleSubmit
+                                // navigation.navigate("Main", { screen: "Home" })
+                            }
+                        />
+                        <Box 
+                            marginTop='m'
+                            flexDirection='row'
+                            alignItems='center'
+                            justifyContent='center'
+
+                        >
+                            <Text variant='description'>Don't Have account ? </Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                            <Text variant='body2' color='primary1'>Register </Text>
+                            </TouchableOpacity>
+                        </Box>
+                    </Box>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </Layout>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        paddingTop: Constants.statusBarHeight,
-    },
-});
 
 export default Login;
