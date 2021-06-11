@@ -25,6 +25,8 @@ import BackDrop from "../components/Navigation/BackDrop";
 import Drawer from "../components/Navigation/Drawer";
 import Selectables from "../components/Selectables";
 
+import Constants from 'expo-constants'
+
 import {
     HomeScreenNavigationProps,
     HomeScreenRouteProps,
@@ -102,13 +104,16 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                 navigation={navigation}
             />
             {/* <BackDrop width={width} height={height}  onPress={() => {console.log('Pressed')}} /> */}
-            <Layout bg="gray1">
+            <Layout bg="gray1" no_padding_top>
                 <ScrollView>
                     <Box
                         flexDirection="row"
                         alignItems="center"
                         justifyContent="space-between"
                         overflow="visible"
+                        bg='white'
+                        elevation={1}
+                        style={{paddingTop: Constants.statusBarHeight}}
                     >
                         <TouchableOpacity onPress={showDrawer}>
                             <Box elevation={10} margin="m">
@@ -116,6 +121,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                                     name="menu-fold"
                                     size={30}
                                     color={theme.colors.primary3}
+                                    style={{shadowColor: "#000",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 5,
+                                    },
+                                    shadowOpacity: 0.34,
+                                    shadowRadius: 6.27,
+                                    
+                                    elevation: 10,}}
                                 />
                             </Box>
                         </TouchableOpacity>
@@ -123,6 +137,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                             onPress={() => navigation.navigate("Profile")}
                         >
                             <Avatar
+                                elevation={10}
                                 margin="m"
                                 size={40}
                                 type="square"

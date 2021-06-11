@@ -46,9 +46,16 @@ const FilterView: React.FC<FilterViewProps> = ({
 
     const [value, setValue] = useState<ValueType | ValueType[] | null>(null);
 
-    const [items, setItems] = useState([
-        { label: "Apple", value: "apple" },
-        { label: "Banana", value: "banana" },
+    const [categoryItems, setCategoryItems] = useState([
+        { label: "Law", value: "Law" },
+        { label: "IT", value: "IT" },
+    ]);
+
+    const [locationItems, setLocationItems] = useState([
+        { label: "Sfax", value: "Sfax" },
+        { label: "Tunis", value: "Tunis" },
+        { label: "Sousse", value: "Sousse" },
+        { label: "...", value: "..." },
     ]);
 
     // category state
@@ -129,24 +136,10 @@ const FilterView: React.FC<FilterViewProps> = ({
                             placeholder="Select Category"
                             open={categoryOpen}
                             value={value}
-                            items={items}
+                            items={categoryItems}
                             setOpen={setCategoryOpen}
                             setValue={setValue}
-                            setItems={setItems}
-                            style={{borderColor: theme.colors.primary1}}
-                            dropDownContainerStyle={{borderColor: theme.colors.primary1}}
-                        />
-                    </Box>
-                    <Box marginVertical="s">
-                        <DropDownPicker
-                            zIndex={400}
-                            placeholder="Select Sub Category"
-                            open={subCategoryOpen}
-                            value={value}
-                            items={items}
-                            setOpen={setSubCategoryOpen}
-                            setValue={setValue}
-                            setItems={setItems}
+                            setItems={setCategoryItems}
                             style={{borderColor: theme.colors.primary1}}
                             dropDownContainerStyle={{borderColor: theme.colors.primary1}}
                         />
@@ -157,10 +150,10 @@ const FilterView: React.FC<FilterViewProps> = ({
                             placeholder="Select Location"
                             open={loactionOpen}
                             value={value}
-                            items={items}
+                            items={locationItems}
                             setOpen={setLocationOpen}
                             setValue={setValue}
-                            setItems={setItems}
+                            setItems={setLocationItems}
                             style={{borderColor: theme.colors.primary1}}
                             dropDownContainerStyle={{borderColor: theme.colors.primary1}}
                         />
