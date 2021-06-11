@@ -35,6 +35,7 @@ const FilterView: React.FC<FilterViewProps> = ({
     width,
     height,
     translateY,
+    onApply,
     ...rest
 }) => {
     const theme = useTheme<Theme>()
@@ -380,7 +381,7 @@ const FilterView: React.FC<FilterViewProps> = ({
                         margin="m"
                         elevation={10}
                         title="Apply"
-                        onPress={() => {}}
+                        onPress={() => onApply!({})}
                     />
                 </Box>
             </ScrollView>

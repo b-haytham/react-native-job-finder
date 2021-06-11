@@ -19,7 +19,11 @@ export type MainStackParamList = {
     Favourites: undefined
     Applications: undefined
     Categories: undefined
-    Search: undefined
+    Search: {
+        show_filters?: boolean
+        focus_input?: boolean
+        search_term?: string
+    }
     Job_Listing: {
         category?: JobCategory
     }

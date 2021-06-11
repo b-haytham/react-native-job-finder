@@ -1,7 +1,14 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useTheme } from "@shopify/restyle";
-import React, { useState } from "react";
-import { Dimensions, FlatList, Pressable, ScrollView, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+    ActivityIndicator,
+    Dimensions,
+    FlatList,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
     useSharedValue,
@@ -33,17 +40,20 @@ interface HomeScreenProps {
 }
 
 const { width, height } = Dimensions.get("screen");
-const HIDDEN_VIEW_HEIGHT = height * .9
+const HIDDEN_VIEW_HEIGHT = height * 0.9;
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     const theme = useTheme<Theme>();
-    
-    const hiddenViewTranslateY = useSharedValue(HIDDEN_VIEW_HEIGHT)
+    const [display, setDisplay] = useState(false)
+    useEffect(()=>{setDisplay(true)},[])
+    const hiddenViewTranslateY = useSharedValue(HIDDEN_VIEW_HEIGHT);
 
-    const categories = useAppSelector(state => state.categories.category_list)
-    const current_user = useAppSelector(state => state.user.current_user)
+    const categories = useAppSelector(
+        (state) => state.categories.category_list
+    );
+    const current_user = useAppSelector((state) => state.user.current_user);
 
-    const jobs = useAppSelector(state => state.jobs.job_list)
+    const jobs = useAppSelector((state) => state.jobs.job_list);
 
     // category state
     const [category, setCategory] = useState(null);
@@ -59,20 +69,18 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
         drawerTranslateX.value = withTiming(0);
     };
 
-
-
     return (
         <>
-            <HiddenView 
+            <HiddenView
                 width={width}
                 height={HIDDEN_VIEW_HEIGHT}
-                component={<FlatList
-                    keyExtractor={(item: JobCategory) => item.id.toString()}
-                    style={{ alignSelf: "center" }}
-                    data={categories}
-                    numColumns={2}
-                    renderItem={({ item }: { item: JobCategory }) => (
-                        
+                component={
+                    <FlatList
+                        keyExtractor={(item: JobCategory) => item.id.toString()}
+                        style={{ alignSelf: "center" }}
+                        data={categories}
+                        numColumns={2}
+                        renderItem={({ item }: { item: JobCategory }) => (
                             <CategoryCard
                                 onPress={() =>
                                     navigation.navigate("Job_Listing", {
@@ -82,9 +90,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                                 width={width / 2 - theme.spacing.m}
                                 category={item}
                             />
-                        
-                    )}
-                />}
+                        )}
+                    />
+                }
                 translateY={hiddenViewTranslateY}
             />
             <Drawer
@@ -111,15 +119,17 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                                 />
                             </Box>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() =>navigation.navigate('Profile')}>
-                        <Avatar
-                            margin="m"
-                            size={40}
-                            type="square"
-                            source={{
-                                uri: current_user!.image,
-                            }}
-                        />
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("Profile")}
+                        >
+                            <Avatar
+                                margin="m"
+                                size={40}
+                                type="square"
+                                source={{
+                                    uri: current_user!.image,
+                                }}
+                            />
                         </TouchableOpacity>
                     </Box>
                     <Hero
@@ -128,6 +138,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                         subtitle="Let's find your dream job "
                         searchValue={searchTerm}
                         onChangeValue={(v) => setSearchTerm(v)}
+                        onSearchPress={() => navigation.navigate('Search', {search_term: searchTerm, focus_input: true})}
+                        onFilterPress={() => navigation.navigate('Search', {show_filters: true})}
                     />
                     <Box marginVertical="m">
                         <Box
@@ -138,7 +150,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                             marginBottom="m"
                         >
                             <Text variant="headline4">Categories</Text>
-                            <TouchableOpacity onPress={() => hiddenViewTranslateY.value = 0}>
+                            <TouchableOpacity
+                                onPress={() => (hiddenViewTranslateY.value = 0)}
+                            >
                                 <Text variant="body2" color="primary1">
                                     Sea all
                                 </Text>
@@ -165,16 +179,27 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
                         >
                             <Text variant="headline4">Job offers</Text>
                         </Box>
-                        {jobs.map(j => (
-                            <SimpleJobCard 
+                        {display ? jobs.map((j) => (
+                            <SimpleJobCard
                                 key={j.id}
                                 job={j}
-                                onImagePress={() => navigation.navigate('Job_Detail', {job: j})}
-                                marginHorizontal='m'
-                                
-                                marginBottom='m'
+                                onImagePress={() =>
+                                    navigation.navigate("Job_Detail", {
+                                        job: j,
+                                    })
+                                }
+                                marginHorizontal="m"
+                                marginBottom="m"
                             />
-                        ))}
+                        )) : (
+                            <Box 
+                                flex={1}
+                                justifyContent='center'
+                                alignItems='center'
+                                >
+                                    <ActivityIndicator size='small' color={theme.colors.primary1} />
+                                </Box>
+                        )}
                     </Box>
                 </ScrollView>
             </Layout>
