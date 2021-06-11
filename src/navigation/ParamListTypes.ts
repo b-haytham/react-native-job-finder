@@ -19,6 +19,7 @@ export type MainStackParamList = {
     Favourites: undefined
     Applications: undefined
     Categories: undefined
+    Search: undefined
     Job_Listing: {
         category?: JobCategory
     }

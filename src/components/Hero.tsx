@@ -3,10 +3,12 @@ import {
     FontAwesome5,
     MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/core";
 import { BoxProps, useTheme } from "@shopify/restyle";
 import React from "react";
 import {} from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { SharedElement } from "react-navigation-shared-element";
 import { Box, Text } from "../utils/restyle";
 import { Theme } from "../utils/theme";
 
@@ -19,6 +21,7 @@ interface HeroProps extends BoxProps<Theme> {
 
 const Hero: React.FC<HeroProps> = ({ title, subtitle ,searchValue , onChangeValue, ...rest }) => {
     const theme = useTheme<Theme>();
+    const navigation = useNavigation()
     return (
         <Box
             bg="primary1"
@@ -33,6 +36,8 @@ const Hero: React.FC<HeroProps> = ({ title, subtitle ,searchValue , onChangeValu
             <Text variant="body" color="white">
                 {subtitle}
             </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                <SharedElement id='search'>
             <Box flexDirection="row" alignItems="center" marginTop="m">
                 <Box
                     flexGrow={1}
@@ -67,6 +72,8 @@ const Hero: React.FC<HeroProps> = ({ title, subtitle ,searchValue , onChangeValu
                     </TouchableOpacity>
                 </Box>
             </Box>
+            </SharedElement>
+            </TouchableOpacity>
         </Box>
     );
 };
